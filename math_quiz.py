@@ -137,9 +137,11 @@ score += 1
 fifth_problem()
 
 total_questions = 5
-
 marks = int(score/total_questions) * 100
 if marks > 70:
     print('Your final score is: ' + str(marks) + '%')
     print("WOW! You're really good at this, " + name + '!')
     print('Thanks for playing')
+    pass
+else:
+    pass
