@@ -1,5 +1,3 @@
-score = 0
-
 
 def greet_player():
     print("\n\nHello! Welcome to Ben's Simple Math Quiz.")
@@ -14,18 +12,24 @@ def respond_name():
     print('\nHello, ' + name + '! Are you ready to begin?')
 
 
-def is_player_ready():
-    if is_ready_first.lower() == 'yes':
+def is_player_ready(): # what happens if I don't say 'yes' or 'no'? Should have a loop until answer is yes or no.
+    #if answer is no, program should end, not continue on as if I had said yes.
+
+    #gather user input here, not in main function.
+    if is_ready_first.lower() == 'yes':  #try not to use global variables like is_ready_first
+                                         #either get input from within this function, or pass a variable to the
+                                         #function from main. ex: def is_player_ready(is_ready_first):
         print("""\nOkay, let's begin! You will be solving 5 problems, all of which are graded, so\
  be sure to keep an eye out for your total score at the end!\n\n """)
         print('Here is the first problem:\n')
         print('2 * 3 = ?\n')
     elif is_ready_first.lower() == 'no':
         print('Okay, ' + name + '. I will be here when you decide to come back!')
+        #if no: exit
 
 
 def first_problem():
-    if int(first_answer) < 6:
+    if int(first_answer) < 6:  # again, don't use global variables. pass first_answer as an argument to the functon
         print('\nSorry, ' + name + ' that number is too low. Try again!')
     elif int(first_answer) > 6:
         print('\nSorry, ' + name + ' that is too high. Try again!')
@@ -101,47 +105,53 @@ def fifth_problem():
     elif int(fifth_answer) == 100000:
         print('\nCorrect')
 
+if __name__ == '__main__':
+    #needs a overarching loop structure. quiz should only continue is certain conditions are met.
+    score = 0
+    greet_player()
+    name: str = get_name() #more of this style of input gathering. make it be returned from a function.
+    respond_name()
 
-greet_player()
-name: str = get_name()
-respond_name()
+    is_ready_first = input() #don't gather input like this
+    is_player_ready()
+    first_answer = input('Answer: ')
+    score += 1
+    first_problem()
 
-is_ready_first = input()
-is_player_ready()
-first_answer = input('Answer: ')
-score += 1
-first_problem()
+    is_ready_second = input()
+    moving_on_second()
+    second_answer = input('Answer: ')
+    score += 1
+    second_problem()
 
-is_ready_second = input()
-moving_on_second()
-second_answer = input('Answer: ')
-score += 1
-second_problem()
+    is_ready_third = input()
+    moving_on_third()
+    third_answer = input('Answer: ')
+    score += 1
+    third_problem()
 
-is_ready_third = input()
-moving_on_third()
-third_answer = input('Answer: ')
-score += 1
-third_problem()
+    is_ready_fourth = input()
+    moving_on_fourth()
+    fourth_answer = input('Answer: ')
+    score += 1
+    fourth_problem()
 
-is_ready_fourth = input()
-moving_on_fourth()
-fourth_answer = input('Answer: ')
-score += 1
-fourth_problem()
+    is_ready_fifth = input()
+    moving_on_fifth()
+    fifth_answer = input('Answer: ')
+    score += 1
+    fifth_problem()
 
-is_ready_fifth = input()
-moving_on_fifth()
-fifth_answer = input('Answer: ')
-score += 1
-fifth_problem()
+    total_questions = 5
+    marks = int(score/total_questions) * 100
+    if marks > 70:
+        print('Your final score is: ' + str(marks) + '%')
+        print("WOW! You're really good at this, " + name + '!')
+        print('Thanks for playing')
+        pass
+    else:
+        pass
 
-total_questions = 5
-marks = int(score/total_questions) * 100
-if marks > 70:
-    print('Your final score is: ' + str(marks) + '%')
-    print("WOW! You're really good at this, " + name + '!')
-    print('Thanks for playing')
-    pass
-else:
-    pass
+
+
+
